@@ -1,0 +1,51 @@
+name: nft-factory-demo
+version: 0.1.0
+main: api/index.js
+author:
+  name: ArcBlock
+license: ''
+title: NFT Factory Demo
+logo: logo.png
+description: Blocklet that demos capabilities of ABT Node Notification service
+group: dapp
+specVersion: 1.1.1
+files:
+  - blocklet.md
+  - README.md
+  - logo.png
+  - build
+keywords:
+  - dapp
+  - demo
+  - auth
+  - profile
+interfaces:
+  - type: web
+    name: publicUrl
+    path: /
+    prefix: '*'
+    port: BLOCKLET_PORT
+    protocol: http
+    services:
+      - name: '@abtnode/auth-service'
+        config:
+          blockUnauthenticated: true
+did: z8iZkfjSjGsZdR45PWXKxV3TtBx2z1tRuc8YD
+community: ''
+documentation: ''
+homepage: ''
+timeout:
+  start: 60
+requirements:
+  abtnode: '>=1.3.0'
+environments: []
+scripts:
+  dev: npm run start
+screenshots: []
+children: []
+charging:
+  price: 0
+  tokens: []
+  shares: []
+capabilities:
+  clusterMode: false
