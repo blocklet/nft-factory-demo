@@ -6,7 +6,7 @@ author:
 license: ''
 title: NFT Factory Demo
 logo: logo.png
-description: Blocklet that demos capabilities of ABT Node Notification service
+description: Blocklet that demos capabilities of NFT on arcblock platform.
 group: dapp
 specVersion: 1.1.1
 files:
@@ -29,8 +29,8 @@ interfaces:
     services:
       - name: '@abtnode/auth-service'
         config:
-          blockUnauthenticated: true
-did: z8iZkfjSjGsZdR45PWXKxV3TtBx2z1tRuc8YD
+          blockUnauthenticated: false
+did: z8iZwR8kvUuU8VJLzPyXtTR3ekLQDP5EmUMve
 community: ''
 documentation: ''
 homepage: ''
