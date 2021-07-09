@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 const path = require('path');
 const AuthStorage = require('@arcblock/did-auth-storage-nedb');
 const AuthService = require('@blocklet/sdk/service/auth');

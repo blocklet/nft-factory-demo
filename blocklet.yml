@@ -38,9 +38,25 @@ timeout:
   start: 60
 requirements:
   abtnode: '>=1.3.0'
-environments: []
+environments:
+  - name: CHAIN_HOST
+    description: Please provide endpoint of chain
+    required: false
+    default: 'https://beta.abtnetwork.io/api/'
+    secure: false
+  - name: VIP_PRICE
+    description: Please set vip price
+    required: true
+    default: '10'
+    secure: false
+  - name: SERVER_URL
+    description: The base url of the running instance
+    required: true
+    default: ''
+    secure: false
 scripts:
   dev: npm run start
+  preStart: node api/hooks/pre-start.js
 screenshots: []
 children: []
 charging:

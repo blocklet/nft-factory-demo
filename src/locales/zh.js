@@ -8,4 +8,10 @@ module.exports = flat({
   role: '角色',
   lastLogin: '上次登录',
   createdAt: '创建时间',
+  buy: {
+    title: 'Payment Required',
+    scan: 'Scan with DID Wallet',
+    confirm: 'Review and complete the purchase with DID Wallet',
+    success: 'Purchase success',
+  },
 });

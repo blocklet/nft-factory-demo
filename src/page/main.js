@@ -1,6 +1,6 @@
+/* eslint-disable arrow-parens */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import dayjs from 'dayjs';
 
 import Avatar from '@material-ui/core/Avatar';
 
@@ -9,53 +9,51 @@ import Button from '@arcblock/ux/lib/Button';
 import { useLocaleContext } from '@arcblock/ux/lib/Locale/context';
 import Tag from '@arcblock/ux/lib/Tag';
 import DidAddress from '@arcblock/did-react/lib/Address';
+import DidAuth from '@arcblock/did-react/lib/Auth';
 
 import { useSessionContext } from '../libs/session';
-import SendButton from '../components/send';
-
-const formatToDatetime = (date) => {
-  if (!date) {
-    return '-';
-  }
-
-  return dayjs(date).format('YYYY-MM-DD hh:mm:ss');
-};
+import { getWebWalletUrl } from '../libs/util';
 
 export default function Main() {
   const { session, api } = useSessionContext();
   const [user, setUser] = useState();
+  const [buyOpen, setBuyOpen] = useState(false);
   const { t } = useLocaleContext();
-
-  useEffect(() => {
-    getData();
-  }, [session.user]); //eslint-disable-line
 
   const getData = () => {
     api
       .get('/api/user')
       .then((res) => {
-        console.log(res.data.user);
         setUser(res.data.user);
       })
       .catch(() => {});
   };
 
+  useEffect(() => {
+    getData();
+  }, [session.user]); //eslint-disable-line
+
   const isLogin = !!session.user;
 
-  const rows = !!user
-    ? [
-        { name: t('name'), value: user.fullName },
-        { name: t('avatar'), value: <Avatar alt="" src={user.avatar}></Avatar> },
-        { name: t('did'), value: <DidAddress>{user.did}</DidAddress> },
-        { name: t('email'), value: user.email },
-        {
-          name: t('role'),
-          value: <Tag type={user.role === 'owner' ? 'success' : 'default'}>{user.role}</Tag>,
-        },
-        { name: t('lastLogin'), value: formatToDatetime(user.updatedAt) },
-        { name: t('createdAt'), value: formatToDatetime(user.createdAt) },
-      ].filter(Boolean)
-    : [];
+  let rows = [];
+  if (user) {
+    rows = [
+      { name: t('name'), value: user.fullName },
+      { name: t('avatar'), value: <Avatar alt="" src={user.avatar} /> },
+      { name: t('did'), value: <DidAddress>{user.did}</DidAddress> },
+      { name: t('email'), value: user.email },
+      {
+        name: t('role'),
+        value: <Tag type={user.role === 'owner' ? 'success' : 'default'}>{user.role}</Tag>,
+      },
+      { name: t('lastLogin'), value: user.lastLoginAt },
+      { name: t('createdAt'), value: user.createdAt },
+    ].filter(Boolean);
+  }
+
+  const onAuthSuccess = () => {
+    setBuyOpen(false);
+  };
 
   return (
     <Container>
@@ -65,15 +63,38 @@ export default function Main() {
         </div>
         <div className="right">
           {isLogin && (
-            <span style={{ top: 1, position: 'relative', marginRight: 6 }}>Hello, {session.user.fullName}</span>
+            <span style={{ top: 1, position: 'relative', marginRight: 6 }}>
+              Hello,
+              {session.user.fullName}
+            </span>
           )}
           <Button onClick={() => (isLogin ? session.logout() : session.login())}>{isLogin ? 'Logout' : 'Login'}</Button>
         </div>
       </Media>
 
       {!user && (
-        <div style={{ textAlign: 'center', marginTop: '10vh', fontSize: 18, color: '#888' }}>
-          You are not logged in yet
+        <div>
+          <p>You are not logged in yet, please buy the VIP NFT to continue.</p>
+          <Button color="primary" variant="contained" onClick={() => setBuyOpen(true)}>
+            Buy VIP Now!
+          </Button>
+          {buyOpen && (
+            <DidAuth
+              responsive
+              action="buy-vip"
+              checkFn={api.get}
+              onSuccess={onAuthSuccess}
+              checkTimeout={5 * 60 * 1000}
+              webWalletUrl={getWebWalletUrl()}
+              disableClose
+              messages={{
+                title: t('buy.title'),
+                scan: t('buy.scan'),
+                confirm: t('buy.confirm'),
+                success: t('buy.success'),
+              }}
+            />
+          )}
         </div>
       )}
 
@@ -99,9 +120,6 @@ export default function Main() {
               </InfoRow>
             );
           })}
-          <SendButton type="text" className="action">
-            Send text
-          </SendButton>
         </div>
       )}
     </Container>

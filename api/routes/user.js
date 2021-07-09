@@ -10,15 +10,10 @@ module.exports = {
 
     app.get('/api/user', async (req, res) => {
       if (!req.user) {
-        res.json({
-          user: null
-        });
-        return;
+        return res.json({ user: null });
       }
       const { user } = await authClient.getUser(req.user.did);
-      res.json({
-        user
-      });
+      return res.json({ user });
     });
   },
 };

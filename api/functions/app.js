@@ -8,17 +8,18 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const fallback = require('express-history-api-fallback');
 
-const isProduction = process.env.NODE_ENV !== 'development'
+const isProduction = process.env.NODE_ENV !== 'development';
 
 // Create and config express application
-const server = express();
-server.use(compression());
-server.use(cookieParser());
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
-server.use(cors());
+const app = express();
+app.use(compression());
+app.set('trust proxy', true);
+app.use(cookieParser());
+app.use(bodyParser.json({ limit: '1 mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '1 mb' }));
+app.use(cors());
 
-server.use(
+app.use(
   morgan((tokens, req, res) => {
     const log = [
       tokens.method(req, res),
@@ -30,16 +31,11 @@ server.use(
       'ms',
     ].join(' ');
 
-    if (isProduction) {
-      // Log only in AWS context to get back function logs
-      console.log(log);
-    }
-
     return log;
   })
 );
 
-server.use((req, res, next) => {
+app.use((req, res, next) => {
   if (req.headers['x-user-did']) {
     req.user = {
       did: req.headers['x-user-did'],
@@ -52,32 +48,29 @@ server.use((req, res, next) => {
 
 const router = express.Router();
 
+require('../handlers').init(router);
 require('../routes/user').init(router);
-require('../routes/notification').init(router);
+require('../routes/nft').init(router);
 
 if (isProduction) {
-  server.use(compression());
-  server.use(router);
-
-  if (process.env.BLOCKLET_DID) {
-    server.use(`/${process.env.BLOCKLET_DID}`, router);
-  }
+  app.use(compression());
+  app.use(router);
 
   const staticDir = path.resolve(__dirname, '../../', 'build');
-  server.use(express.static(staticDir, { maxAge: '365d', index: false }));
-  server.use(fallback('index.html', { root: staticDir }));
+  app.use(express.static(staticDir, { maxAge: '365d', index: false }));
+  app.use(fallback('index.html', { root: staticDir }));
 
-  server.use((req, res) => {
+  app.use((req, res) => {
     res.status(404).send('404 NOT FOUND');
   });
 
   // eslint-disable-next-line no-unused-vars
-  server.use((err, req, res, next) => {
+  app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
   });
 } else {
-  server.use(router);
+  app.use(router);
 }
 
-exports.server = server;
+exports.app = app;

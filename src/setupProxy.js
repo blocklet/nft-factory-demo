@@ -1,3 +1,5 @@
+/* eslint-disable arrow-parens */
+/* eslint-disable import/no-extraneous-dependencies */
 require('dotenv-flow').config();
 
 const { createProxyMiddleware } = require('http-proxy-middleware');

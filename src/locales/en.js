@@ -8,4 +8,10 @@ module.exports = flat({
   role: 'Role',
   lastLogin: 'Last Login',
   createdAt: 'Created At',
+  buy: {
+    title: 'Payment Required',
+    scan: 'Scan with DID Wallet',
+    confirm: 'Review and complete the purchase with DID Wallet',
+    success: 'Purchase success',
+  },
 });
