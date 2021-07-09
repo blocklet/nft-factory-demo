@@ -83,10 +83,10 @@ export default function Main() {
               responsive
               action="buy-vip"
               checkFn={api.get}
+              onClose={() => setBuyOpen(false)}
               onSuccess={onAuthSuccess}
               checkTimeout={5 * 60 * 1000}
               webWalletUrl={getWebWalletUrl()}
-              disableClose
               messages={{
                 title: t('buy.title'),
                 scan: t('buy.scan'),
