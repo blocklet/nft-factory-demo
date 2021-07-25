@@ -1,3 +1,7 @@
+## 0.4.0 (July 25, 2021)
+
+
+
 ## 0.3.0 (July 25, 2021)
 
 - fix: factory mint hook
