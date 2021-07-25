@@ -68,10 +68,16 @@ const getFactoryItx = (price, serverUrl) => {
       type: 'json',
       value: {},
     },
-    hooks: [],
+    hooks: [
+      {
+        name: 'mint',
+        type: 'contract',
+        hook: `transfer("${env.appId}","${toBNStr(price)}")`,
+      },
+    ],
   };
 
-  isValidFactory(itx, true);
+  isValidFactory(itx);
 
   const factoryAddress = toFactoryAddress(itx);
   itx.address = factoryAddress;
