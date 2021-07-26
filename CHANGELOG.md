@@ -1,3 +1,8 @@
+## 0.5.0 (July 26, 2021)
+
+- fix: building issues
+- [skip ci] Update README.md
+
 ## 0.4.0 (July 25, 2021)
 
 
