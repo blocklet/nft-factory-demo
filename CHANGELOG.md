@@ -1,3 +1,8 @@
+## 0.6.0 (August 09, 2021)
+
+- chore: bump deps to latest
+- [skip ci] Update README.md
+
 ## 0.5.0 (July 26, 2021)
 
 - fix: building issues
