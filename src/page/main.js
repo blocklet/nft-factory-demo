@@ -8,8 +8,8 @@ import InfoRow from '@arcblock/ux/lib/InfoRow';
 import Button from '@arcblock/ux/lib/Button';
 import { useLocaleContext } from '@arcblock/ux/lib/Locale/context';
 import Tag from '@arcblock/ux/lib/Tag';
-import DidAddress from '@arcblock/did-react/lib/Address';
-import DidAuth from '@arcblock/did-react/lib/Auth';
+import DidAddress from '@arcblock/did-connect/lib/Address';
+import DidConnect from '@arcblock/did-connect/lib/Connect';
 
 import { useSessionContext } from '../libs/session';
 import { getWebWalletUrl } from '../libs/util';
@@ -79,7 +79,7 @@ export default function Main() {
             Buy VIP Now!
           </Button>
           {buyOpen && (
-            <DidAuth
+            <DidConnect
               responsive
               action="buy-vip"
               checkFn={api.get}
