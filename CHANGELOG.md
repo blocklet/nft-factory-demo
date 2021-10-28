@@ -1,3 +1,7 @@
+## 0.6.2 (October 28, 2021)
+
+- [skip ci] Update README.md
+
 ## 0.6.1 (August 23, 2021)
 
 - chore: replace did-react with did-connect
