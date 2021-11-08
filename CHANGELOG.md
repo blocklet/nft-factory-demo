@@ -1,3 +1,7 @@
+## 0.6.3 (November 08, 2021)
+
+- chore: update deps to latest
+
 ## 0.6.2 (October 28, 2021)
 
 - [skip ci] Update README.md
