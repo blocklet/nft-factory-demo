@@ -1,3 +1,9 @@
+## 0.7.0 (January 21, 2022)
+
+- chore: deprecate SERVER_URL variable
+- chore: bump chain deps to latest
+- [skip ci] Update README.md
+
 ## 0.6.8 (December 28, 2021)
 
 - docs: update docs (abtnode rebranding)
@@ -50,6 +56,3 @@
 - [skip ci] Update README.md
 
 ## 0.2.0 (July 09, 2021)
-
-
-
