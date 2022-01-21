@@ -6,7 +6,7 @@ const env = require('./env');
 const { wallet } = require('./auth');
 const { toBNStr } = require('./utils');
 
-const getFactoryItx = (price, serverUrl) => {
+const getFactoryItx = (price, appUrl) => {
   const itx = {
     name: 'FactoryDemoVIPFactory',
     description: 'Factory to mint VIP passport for Hash Express',
@@ -47,11 +47,11 @@ const getFactoryItx = (price, serverUrl) => {
             },
             display: {
               type: 'url',
-              content: joinUrl(serverUrl, '/api/nft/display'), // accept asset-did in query param
+              content: joinUrl(appUrl, '/api/nft/display'), // accept asset-did in query param
             },
           },
           credentialStatus: {
-            id: joinUrl(serverUrl, '/api/nft/status'),
+            id: joinUrl(appUrl, '/api/nft/status'),
             type: 'NFTStatusList2021',
             scope: 'public',
           },
@@ -111,6 +111,6 @@ const getFactoryDisplay = (
 </svg>`;
 
 module.exports = {
-  factoryItx: getFactoryItx(env.vipPrice, env.serverUrl),
+  factoryItx: getFactoryItx(env.vipPrice, env.appUrl),
   factoryDisplay: getFactoryDisplay(env.appName, 'VIP', wallet.toAddress()),
 };

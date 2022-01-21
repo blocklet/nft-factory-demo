@@ -7,7 +7,7 @@ module.exports = {
   appId: process.env.BLOCKLET_APP_ID || '',
   appName: process.env.BLOCKLET_APP_NAME || 'NFT Factory Demo',
   appDescription: process.env.BLOCKLET_APP_DESCRIPTION || 'NFT Factory demo blocklet',
-  serverUrl: process.env.SERVER_URL || '',
+  appUrl: process.env.BLOCKLET_APP_URL || '',
   vipPrice: Number(process.env.VIP_PRICE || 10),
   isComponent,
 };
