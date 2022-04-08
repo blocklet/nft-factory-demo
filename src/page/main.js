@@ -12,7 +12,6 @@ import DidAddress from '@arcblock/did-connect/lib/Address';
 import DidConnect from '@arcblock/did-connect/lib/Connect';
 
 import { useSessionContext } from '../libs/session';
-import { getWebWalletUrl } from '../libs/util';
 
 export default function Main() {
   const { session, api } = useSessionContext();
@@ -86,7 +85,6 @@ export default function Main() {
               onClose={() => setBuyOpen(false)}
               onSuccess={onAuthSuccess}
               checkTimeout={5 * 60 * 1000}
-              webWalletUrl={getWebWalletUrl()}
               messages={{
                 title: t('buy.title'),
                 scan: t('buy.scan'),

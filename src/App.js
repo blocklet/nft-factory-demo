@@ -5,7 +5,6 @@ import { ThemeProvider } from 'styled-components';
 import { LocaleProvider } from '@arcblock/ux/lib/Locale/context';
 import { create } from '@arcblock/ux/lib/Theme';
 
-import { getWebWalletUrl } from './libs/util';
 import { SessionProvider } from './libs/session';
 import { translations } from './locales';
 import Main from './page/main';
@@ -16,8 +15,6 @@ if (window.blocklet && window.blocklet.prefix) {
 }
 
 function App() {
-  const webWalletUrl = getWebWalletUrl();
-
   const theme = create({
     typography: {
       fontSize: 14,
@@ -45,7 +42,6 @@ function App() {
         <LocaleProvider translations={translations}>
           <SessionProvider
             serviceHost={apiPrefix}
-            webWalletUrl={webWalletUrl}
           >
             <CssBaseline />
             <Main />

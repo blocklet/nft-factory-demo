@@ -1,5 +1,5 @@
 name: nft-factory-demo
-version: 0.7.0
+version: 0.7.1
 main: api/index.js
 author:
   name: ArcBlock
@@ -8,7 +8,7 @@ title: NFT Factory Demo
 logo: logo.png
 description: Blocklet that demos capabilities of NFT on arcblock platform.
 group: dapp
-specVersion: 1.2.1
+specVersion: 1.2.4
 files:
   - blocklet.md
   - README.md
@@ -45,11 +45,13 @@ environments:
     required: false
     default: 'https://beta.abtnetwork.io/api/'
     secure: false
+    shared: true
   - name: VIP_PRICE
     description: Please set vip price
     required: true
     default: '10'
     secure: false
+    shared: true
 scripts:
   dev: npm run start
   preStart: node api/hooks/pre-start.js
@@ -60,3 +62,4 @@ payment:
   share: []
 capabilities:
   clusterMode: false
+  component: true

@@ -1,3 +1,7 @@
+## 0.7.1 (四月 06, 2022)
+
+- chore: remove getWebWalletUrl
+
 ## 0.7.0 (January 21, 2022)
 
 - chore: deprecate SERVER_URL variable
