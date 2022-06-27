@@ -1,5 +1,5 @@
 name: nft-factory-demo
-version: 0.7.1
+version: 0.7.2
 main: api/index.js
 author:
   name: ArcBlock
@@ -8,7 +8,7 @@ title: NFT Factory Demo
 logo: logo.png
 description: Blocklet that demos capabilities of NFT on arcblock platform.
 group: dapp
-specVersion: 1.2.4
+specVersion: 1.2.7
 files:
   - blocklet.md
   - README.md
@@ -31,6 +31,15 @@ interfaces:
       - name: '@abtnode/auth-service'
         config:
           blockUnauthenticated: false
+          whoCanAccess: all
+          profileFields:
+            - fullName
+            - email
+            - avatar
+          allowSwitchProfile: true
+          webWalletUrl: https://web.abtwallet.io
+          ignoreUrls: []
+          blockUnauthorized: false
 did: z8iZwR8kvUuU8VJLzPyXtTR3ekLQDP5EmUMve
 community: ''
 documentation: ''
@@ -43,7 +52,7 @@ environments:
   - name: CHAIN_HOST
     description: Please provide endpoint of chain
     required: false
-    default: 'https://beta.abtnetwork.io/api/'
+    default: https://beta.abtnetwork.io/api/
     secure: false
     shared: true
   - name: VIP_PRICE

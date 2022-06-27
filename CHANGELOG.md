@@ -1,3 +1,8 @@
+## 0.7.2 (June 27, 2022)
+
+- fix: resize the logo
+- [skip ci] Update README.md
+
 ## 0.7.1 (四月 06, 2022)
 
 - chore: remove getWebWalletUrl
